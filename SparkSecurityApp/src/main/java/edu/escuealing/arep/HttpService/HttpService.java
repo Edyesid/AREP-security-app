@@ -17,7 +17,8 @@ import javax.net.ssl.TrustManagerFactory;
 public class HttpService {
     private String url;
     public HttpService() {
-        this.url = "https://localhost:4444";
+        //this.url = "https://localhost:5000";
+        this.url = "https://ec2-34-227-101-226.compute-1.amazonaws.com:5000";
         secureUrlReader();
     }
 
@@ -31,30 +32,7 @@ public class HttpService {
             while ((inputLine = reader.readLine()) != null) {
                 res += inputLine + "\n";
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public String addPalabra(String palabra) {
-        try {
-            URL siteURL = new URL(url + "/palabras");
-            HttpsURLConnection urlConnection = (HttpsURLConnection) siteURL.openConnection();
-            urlConnection.setRequestMethod("POST");
-            urlConnection.setRequestProperty("Contemt-Type","application/json");
-            urlConnection.setDoOutput(true);
-            PrintWriter printWriter = new PrintWriter(urlConnection.getOutputStream(),true);
-            printWriter.write(palabra);
-            printWriter.close();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            String inputLine = null;
-            String res = "";
-            while ((inputLine = reader.readLine()) != null) {
-                res += inputLine + "\n";
-            }
             return res;
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,8 +41,7 @@ public class HttpService {
 
     private void secureUrlReader() {
         try {
-
-            File trustStoreFile = new File("keystores/myServiceTrust");
+            File trustStoreFile = new File("KeyStores/ServicesTrustStore");
             char[] trustStorePassword = "123456".toCharArray();
             KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
             trustStore.load(new FileInputStream(trustStoreFile), trustStorePassword);

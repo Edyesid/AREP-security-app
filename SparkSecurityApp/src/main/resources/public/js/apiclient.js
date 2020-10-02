@@ -14,6 +14,12 @@ var apiclient = (function () {
             });
             promise.then(() => callback(null),
                         (error) => callback(error));
+        },
+        off: function(callback) {
+            var promise = $.get({
+                url: "/off",
+            });
+            promise.then(callback);
         }
     }
 })();

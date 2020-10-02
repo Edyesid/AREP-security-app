@@ -10,7 +10,7 @@ public class App {
         HttpService service = new HttpService();
         port(getPort());
         staticFiles.location("/public");
-        secure("keyStores/ecikeystore.p12", "123456", "KeyStores/myTrustStore", "123456");
+        secure("keyStores/ecikeystore.p12", "123456", null, null);
         get("/hello", (req, res) -> "Hello World");
         post("/login",(request, response) -> {
             String res = "Error";
@@ -32,16 +32,35 @@ public class App {
         });
 
         get("/islogin", (request, response) -> {
-            response.header("Content-Type", "application/json");
-            return String.valueOf(request.session().attribute("isLogin") != null);
+            request.session(true);
+            if (request.session().isNew()) {
+                request.session().attribute("isLogin", false);
+            }
+            boolean bool = (request.session().attribute("isLogin"));
+            System.out.println(bool);
+            return String.valueOf(bool);
+        });
+
+        get("/off", (request, response) -> {
+            request.session(true);
+            if (request.session().isNew()) {
+                request.session().attribute("isLogin", false);
+            }
+            System.out.println("llego get");
+            request.session().attribute("isLogin", false);
+            return "salio satisfactoriamente";
+        });
+
+        get("/palabras", (request, response) -> {
+            return service.getPalabras();
         });
     }
-
 
     /**
      * Da el puerto solicitado por la aplicación
      * @return puerto
      */
+
     static int getPort() {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));

@@ -6,18 +6,16 @@ public class App {
 
     public static void main(String[] args) {
         port(getPort());
-        secure("keyStores/ecikeystore.p12", "123456", null, null);
-        get("/hello", (req, res) -> "Hello World");
+        secure("keyStores/ecikeystore.p12", "123456","KeyStores/myTrustStore", "123456");
+        //secure("keyStores/ecikeyarep.p12", "123456","myTrustStore","123456");
+        get("/hello", (req, res) -> "Hello World");   
+        get("/palabras", (req, res) -> "Se ha conectado con la otra aplicación");
     }
 
-    /**
-     * Da el puerto solicitado por la aplicaciÃ³n
-     * @return puerto
-     */
     static int getPort() {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
         }
-        return 4567;
+        return 5000;
     }
 }
