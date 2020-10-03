@@ -2,3 +2,5 @@
 [client](https://github.com/Edyesid/AREP-Client-securityapp.git)
 
 [app](https://github.com/Edyesid/AREP-security-app-login.git)
+
+[video](https://youtu.be/f9rC75hFceY)
