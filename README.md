@@ -44,6 +44,32 @@ https://localhost:4567/
 
 [aquí](https://github.com/Edyesid/AREP-security-app-login.git)
 
+## Pruebas
+
+A continuación se muestra los servicios creados y como funcionan
+
+
+Para cada servicio se desplego una maquina en aws mediante el uso de ec2
+
+![1](imagenes/1.png)
+
+Se creo una pagina de login la cual pide un usuario y contraseña
+
+![2](imagenes/2.png)
+
+Si se ingresa un usuario autenticado, se podra redirigir a esta pagina donde dice "logueado satisfactoriamente" junto con un boton de salir de la sesión
+
+![3](imagenes/3.png)
+
+cuando se esta logueado se puede verificar, haciendo un get mediante la direccion /islogin
+
+![4](imagenes/4.png)
+
+para probar la conección con el otro servicio se tiene que dirigir a la ruta /palabras
+
+![5](imagenes/5.png)
+
+
 ## video
 
 [video](https://youtu.be/f9rC75hFceY)
